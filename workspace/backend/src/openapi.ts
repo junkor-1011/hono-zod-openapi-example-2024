@@ -1,8 +1,8 @@
 import { swaggerUI } from '@hono/swagger-ui';
 import type { OpenAPIHono } from '@hono/zod-openapi';
 
-const SWAGGER_UI_PATHNAME = '/docs';
-const OPENAPI_DOC_PATHNAME = '/docs/openapi.json';
+export const SWAGGER_UI_PATHNAME = '/docs';
+export const OPENAPI_DOC_PATHNAME = '/docs/openapi.json';
 
 export function enableOpenAPIDocs(app: OpenAPIHono) {
   // openapi

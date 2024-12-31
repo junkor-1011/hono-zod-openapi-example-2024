@@ -6,6 +6,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "docs:openapi": "tsx ./scripts/generate-openapi.ts",
     "build": "tsx ./scripts/build.ts",
     "dev": "tsx watch --include src/**/*.ts ./src/main.ts"
   },
