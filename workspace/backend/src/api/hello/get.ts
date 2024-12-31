@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+
 import {
   type OpenAPIHono,
   type RouteHandler,
@@ -15,6 +16,29 @@ const getHelloQueryParamSchema = z
     name: z.string().optional().describe('name').openapi({
       example: 'Jane Doe',
     }),
+    values: z
+      .union([
+        z.array(z.string().max(100)).openapi({
+          examples: [
+            ['foo', 'bar', 'baz'],
+            ['yes', 'no'],
+          ],
+        }),
+        z
+          .string()
+          .max(100)
+          .openapi({ examples: ['some string value'] }),
+      ])
+      .optional()
+      .describe(
+        `array query param
+
+if value = ['Internal', 'Server', 'Error'], cause \`Internal Server Error\` just for example.
+`.trim(),
+      )
+      .openapi({
+        examples: [['foo', 'bar', 'baz'], ['yes'], ['positive', 'negative']],
+      }),
   })
   .openapi('getHelloQueryParamSchema', {
     description: 'schema of query params for GET `/hello`',
@@ -32,6 +56,10 @@ const getHelloResponseSchema = z
       .describe('processed datetime')
       .openapi({ example: '2024-12-31T13:46:51Z' }),
     responseId: z.string().uuid().describe('response id'),
+    values: z
+      .array(z.string().max(100))
+      .describe('values')
+      .openapi({ examples: [['foo', 'bar']] }),
   })
   .openapi('getHelloResponseSchema', {
     description: 'description of getHelloResponseSchema',
@@ -71,12 +99,39 @@ const getHelloRoute = createRoute({
 });
 
 const getHelloHandler: RouteHandler<typeof getHelloRoute> = async (c) => {
-  const { name } = c.req.valid('query');
+  const { name, values } = c.req.valid('query');
+
+  const valueList: string[] = (() => {
+    if (values === undefined) {
+      return [];
+    }
+    if (typeof values === 'string') {
+      return [values];
+    }
+    return values;
+  })();
+
+  // 500 example
+  if (
+    valueList.length === 3 &&
+    valueList[0] === 'Internal' &&
+    valueList[1] === 'Server' &&
+    valueList[2] === 'Error'
+  ) {
+    return c.json(
+      {
+        error: 'Internal Server Error',
+      },
+      500,
+    );
+  }
+
   return c.json(
     {
       message: name ? `hello, ${name}!` : 'hello from hono.',
       datetime: new Date().toISOString(),
       responseId: randomUUID(),
+      values: valueList,
     },
     200,
   );
