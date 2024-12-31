@@ -2,6 +2,7 @@ import type { OpenAPIHono } from '@hono/zod-openapi';
 
 import { registerGetHello } from './api/hello/get';
 import { subApp } from './api/sub/sub-app';
+import { registerGetUser } from './api/users/get';
 import { registerPostUser } from './api/users/post';
 
 export const registerRoutesWithOpenAPI = (app: OpenAPIHono) => {
@@ -12,4 +13,5 @@ export const registerRoutesWithOpenAPI = (app: OpenAPIHono) => {
 
   // /users
   registerPostUser(app);
+  registerGetUser(app);
 };
