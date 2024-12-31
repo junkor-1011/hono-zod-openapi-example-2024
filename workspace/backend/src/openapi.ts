@@ -20,7 +20,7 @@ export function enableOpenAPIDocs(app: OpenAPIHono) {
 - [example link](https://example.com)
 
 created by \`@hono/zod-openapi\` & \`@hono/swagger-ui\`
-`,
+`.trim(),
     },
   });
 
