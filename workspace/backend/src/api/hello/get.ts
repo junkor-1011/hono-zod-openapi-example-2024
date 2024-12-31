@@ -16,21 +16,26 @@ const getHelloQueryParamSchema = z
     description: 'schema of query params for GET `/hello`',
   });
 
-const getHelloResponseSchema = z.object({
-  message: z
-    .string()
-    .describe('message')
-    .openapi({ examples: ['hello, Jane Doe!', 'hello from hono.'] }),
-  datetime: z
-    .string()
-    .datetime()
-    .describe('processed datetime')
-    .openapi({ example: '2024-12-31T13:46:51Z' }),
-  responseId: z.string().uuid().describe('response id'),
-});
+const getHelloResponseSchema = z
+  .object({
+    message: z
+      .string()
+      .describe('message')
+      .openapi({ examples: ['hello, Jane Doe!', 'hello from hono.'] }),
+    datetime: z
+      .string()
+      .datetime()
+      .describe('processed datetime')
+      .openapi({ example: '2024-12-31T13:46:51Z' }),
+    responseId: z.string().uuid().describe('response id'),
+  })
+  .openapi('getHelloResponseSchema', {
+    description: 'description of getHelloResponseSchema',
+  });
 
 const getHelloRoute = createRoute({
   path: '/hello',
+  summary: 'simple example',
   method: 'get',
   request: { query: getHelloQueryParamSchema },
   responses: {
