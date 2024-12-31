@@ -1,8 +1,8 @@
 import process from 'node:process';
 
 import { serve } from '@hono/node-server';
-
 import { logger } from 'hono/logger';
+
 import { createApp } from './app';
 
 function main() {
