@@ -5,6 +5,10 @@ import {
   createRoute,
   z,
 } from '@hono/zod-openapi';
+import {
+  clientErrorSchema,
+  serverErrorSchema,
+} from '../../_common/schemas/errors';
 
 const getHelloQueryParamSchema = z
   .object({
@@ -46,6 +50,22 @@ const getHelloRoute = createRoute({
         },
       },
       description: 'normal response of GET `/hello`',
+    },
+    422: {
+      content: {
+        'application/json': {
+          schema: clientErrorSchema,
+        },
+      },
+      description: 'Invalid Request',
+    },
+    500: {
+      content: {
+        'application/json': {
+          schema: serverErrorSchema,
+        },
+      },
+      description: 'Unexpected Error',
     },
   },
 });
