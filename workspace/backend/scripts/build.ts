@@ -1,10 +1,12 @@
+import path from 'node:path';
+
 import esbuild from 'esbuild';
 
 await esbuild.build({
   bundle: true,
   minify: true,
-  entryPoints: ['./src/main.ts'],
-  outdir: './dist',
+  entryPoints: [path.join(import.meta.dirname, '../src/main.ts')],
+  outdir: path.join(import.meta.dirname, '../dist'),
   outExtension: {
     '.js': '.mjs',
   },
