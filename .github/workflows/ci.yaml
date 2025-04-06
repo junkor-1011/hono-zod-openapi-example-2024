@@ -36,3 +36,5 @@ jobs:
         run: pnpm biome check .
       - name: Test for workspaces
         run: pnpm -r test
+      - name: Build Check
+        run: pnpm -r build
