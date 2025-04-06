@@ -34,3 +34,5 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Biome Check
         run: pnpm biome check .
+      - name: Test for workspaces
+        run: pnpm -r test
