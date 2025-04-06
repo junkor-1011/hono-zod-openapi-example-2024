@@ -23,3 +23,5 @@ jobs:
           corepack enable pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Biome Check
+        run: pnpm biome check .
