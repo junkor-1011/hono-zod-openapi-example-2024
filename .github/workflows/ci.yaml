@@ -17,10 +17,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'pnpm'
       - name: corepack
         run: |
           npm install --global corepack
           corepack enable pnpm
+      - name: Cache for pnpm store
+        uses: actions/cache@v4
+        id: pnpm-cache
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-store-${{ runner.os }}-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Biome Check
