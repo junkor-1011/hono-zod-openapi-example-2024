@@ -3,17 +3,26 @@
   "organizeImports": {
     "enabled": true
   },
+  "files": {
+    "ignore": [
+      "**/node_modules/*",
+      "**/dist/*",
+      "**/cdk.out",
+      "**/.next/*",
+      "**/out/*"
+    ]
+  },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "ignore": ["**/node_modules", "**/dist", "**/cdk.out", "**/.next", "**/out"]
+    "ignore": []
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true
     },
-    "ignore": ["**/node_modules", "**/dist", "**/cdk.out", "**/.next", "**/out"]
+    "ignore": []
   },
   "javascript": {
     "formatter": {
