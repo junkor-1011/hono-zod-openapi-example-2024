@@ -1,7 +1,7 @@
 import {
+  createRoute,
   type OpenAPIHono,
   type RouteHandler,
-  createRoute,
 } from '@hono/zod-openapi';
 import {
   clientErrorSchema,

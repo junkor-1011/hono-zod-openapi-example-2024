@@ -1,6 +1,6 @@
 import { randomInt } from 'node:crypto';
 
-import { OpenAPIHono, createRoute, z } from '@hono/zod-openapi';
+import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
 const responseSchema = z
   .object({

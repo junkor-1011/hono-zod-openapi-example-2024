@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 import { createApp } from '../src/app';
-import { OPENAPI_DOC_PATHNAME, enableOpenAPIDocs } from '../src/openapi';
+import { enableOpenAPIDocs, OPENAPI_DOC_PATHNAME } from '../src/openapi';
 
 async function main() {
   const app = createApp();
