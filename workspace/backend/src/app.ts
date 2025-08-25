@@ -1,12 +1,8 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
-import type { MiddlewareHandler } from 'hono';
+
 import { registerRoutesWithOpenAPI } from './routes';
 
-interface CreateAppArgs {
-  readonly middlewares?: readonly MiddlewareHandler[];
-}
-
-export function createApp({ middlewares }: CreateAppArgs) {
+export function createApp() {
   const app = new OpenAPIHono({
     defaultHook: (result, c) => {
       if (!result.success) {
@@ -20,8 +16,6 @@ export function createApp({ middlewares }: CreateAppArgs) {
       }
     },
   });
-
-  app.use(...(middlewares || []));
 
   // routes
   registerRoutesWithOpenAPI(app);

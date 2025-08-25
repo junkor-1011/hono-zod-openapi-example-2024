@@ -7,10 +7,10 @@ import { createApp } from './app';
 import { enableOpenAPIDocs } from './openapi';
 
 function main() {
-  const app = createApp({
-    // middleware
-    middlewares: [logger()],
-  });
+  const app = createApp();
+
+  // middleware
+  app.use(logger());
 
   // openapi & swagger-ui
   if (process.env.NODE_ENV !== 'production') {
