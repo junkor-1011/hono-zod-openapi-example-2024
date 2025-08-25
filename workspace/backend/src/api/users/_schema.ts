@@ -1,7 +1,7 @@
 import { z } from '@hono/zod-openapi';
 
 export const userBaseSchema = z.object({
-  id: z.string().uuid().describe('id of the user'),
+  id: z.uuid().describe('id of the user'),
   name: z
     .string()
     .max(100)
@@ -21,7 +21,7 @@ export const userBaseSchema = z.object({
     .array(z.string().min(5))
     .describe('groups')
     .openapi({ examples: [['groupA', 'groupB'], ['groupC']] }),
-  birthDate: z.string().date().describe('birth date'),
-  createdAt: z.string().datetime().describe('account created datetime'),
-  updatedAt: z.string().datetime().describe('account updated datetime'),
+  birthDate: z.iso.date().describe('birth date'),
+  createdAt: z.iso.datetime().describe('account created datetime'),
+  updatedAt: z.iso.datetime().describe('account updated datetime'),
 });

@@ -8,7 +8,7 @@ const responseSchema = z
       .string()
       .describe('message')
       .openapi({ example: 'hello, SubApp' }),
-    datetime: z.string().datetime(),
+    datetime: z.iso.datetime(),
     ok: z.boolean(),
   })
   .openapi('DummyResponseSchema', {
