@@ -1,11 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
-
 import { createApp } from '../src/app';
 import { enableOpenAPIDocs, OPENAPI_DOC_PATHNAME } from '../src/openapi';
 
 async function main() {
-  const app = createApp();
+  const app = createApp({});
   enableOpenAPIDocs(app);
 
   const res = await app.request(OPENAPI_DOC_PATHNAME, {

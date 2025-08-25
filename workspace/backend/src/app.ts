@@ -21,7 +21,9 @@ export function createApp({ middlewares }: CreateAppArgs) {
     },
   });
 
-  app.use(...(middlewares || []));
+  if (middlewares && middlewares.length > 0) {
+    app.use(...middlewares);
+  }
 
   // routes
   registerRoutesWithOpenAPI(app);
