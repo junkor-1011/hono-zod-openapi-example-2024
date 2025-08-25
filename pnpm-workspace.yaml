@@ -1,6 +1,8 @@
 packages:
-  - 'workspace/*'
-  - 'packages/*'
-  - 'components/**'
+  - workspace/*
+  - packages/*
+  - components/**
   - '!**/test/**'
-  # - '!**/cdk.out/**'
+
+onlyBuiltDependencies:
+  - esbuild
